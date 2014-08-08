@@ -63,14 +63,7 @@ L.mapbox.accessToken = 'pk.eyJ1IjoiZ3JhZmEiLCJhIjoiU2U2QnIzUSJ9.4LnG05Ptvi1sUQ8t
 // http://firebaseio.com/ and use your own database if you want to try out
 // this example.
 var base = new Firebase('https://herenow.firebaseio.com/'),
-// generate a random color for the marker, just for fun.
-    // color = '#' + [
-    //     (~~(Math.random() * 16)).toString(16),
-    //     (~~(Math.random() * 16)).toString(16),
-    //     (~~(Math.random() * 16)).toString(16)].join('');
-    colorRemove = '#f30';
-    colorGood = '#bada55';
-    map = L.mapbox.map('map');
+    map = L.mapbox.map('map', 'grafa.iih2e33n');
     geolocate = document.getElementById('geolocate');
 
 map.setView([45.70425746325636,-122.75944948196411],16);
@@ -117,6 +110,7 @@ var marker = L.marker([0, 0], {
                 '<option value="smoking">Smoking</option>' +
                 '<option value="swimming">Swimming</option>' +
                 '<option value="chilling">Chillin</option>' +
+                '<option value="other">Other</option>' +
             '</select><br>' +
             '<h2>Say more: </h2>' +
             '<input type="text" id="message" placeholder="blah" required width=70px  /><br />' +
@@ -125,7 +119,7 @@ var marker = L.marker([0, 0], {
 // every time the marker is dragged, update the form
 map.on('click', function(e) {
     marker.setLatLng(map.getCenter());
-    marker.openPopup();
+    // marker.openPopup();
     // When the user clicks Add
     L.DomEvent.addListener(L.DomUtil.get('add-button'), 'click', function() {
         // First, clean the potential-HTML they've added to the value.
@@ -133,41 +127,49 @@ map.on('click', function(e) {
         var statuscond = L.DomUtil.get('status').value;
         // Get the current draggable marker's position and GeoJSON representation
         var geojson = marker.toGeoJSON();
-        switch (geojson.properties.title) {
-            case 'dancing':
-              geojson.properties['marker-color'] = colorGood;
-              break;
-            case 'drinking':
-              geojson.properties['marker-color'] = colorGood;
-              break;
-            case 'lost':
-              geojson.properties['marker-color'] = colorGood;
-              break;
-            case 'lovemaking':
-              geojson.properties['marker-color'] = colorGood;
-              break;
-            case 'smoking':
-              geojson.properties['marker-color'] = colorGood;
-              break;
-            case 'swimming':
-              geojson.properties['marker-color'] = colorGood;
-              break;
-            case 'chilling':
-              geojson.properties['marker-color'] = colorGood;
-              break;
-            default:
-              geojson.properties['marker-color'] = colorGood;
-              break;
-        }
-        // if (statuscond == 'remove') {
-        //     geojson.properties['marker-color'] = colorRemove;
-        // } else{
-        //     geojson.properties['marker-color'] = colorGood;
-        // };
-        
+
         // geojson.properties['marker-symbol'] = 'beer';
         geojson.properties.title = message;
         geojson.properties.statuscond = statuscond;
+
+        switch (geojson.properties.statuscond) {
+            case 'dancing':
+                geojson.properties['marker-color'] = '#FF0066';
+                geojson.properties['marker-symbol'] = 'pitch';
+              break;
+            case 'drinking':
+                geojson.properties['marker-color'] = '#bada55';
+                geojson.properties['marker-symbol'] = 'beer';
+              break;
+            case 'lost':
+                geojson.properties['marker-color'] = '#E62E00';
+                geojson.properties['marker-symbol'] = 'roadblock';
+              break;
+            case 'lovemaking':
+                geojson.properties['marker-color'] = '#f30';
+                geojson.properties['marker-symbol'] = 'heart';
+              break;
+            case 'smoking':
+                geojson.properties['marker-color'] = '#996633';
+                geojson.properties['marker-symbol'] = 'danger';
+              break;
+            case 'swimming':
+                geojson.properties['marker-color'] = '#00FFFF';
+                geojson.properties['marker-symbol'] = 'swimming';
+              break;
+            case 'chilling':
+                geojson.properties['marker-color'] = '#FFFF00';
+                geojson.properties['marker-symbol'] = 'lodging';
+              break;
+            case 'other':
+                geojson.properties['marker-color'] = '#ddd';
+                geojson.properties['marker-symbol'] = 'harbor';
+              break;
+            default:
+              geojson.properties['marker-symbol'] = 'star';
+              
+        }
+
         // And save it to Firebase
         base.push(geojson);
         marker.closePopup();
@@ -178,7 +180,6 @@ map.on('click', function(e) {
 // with a cap of 200, listen for new markers being added to the map
 base.limit(200).on('child_added', function(snapshot) {
     // And for each new marker, add a featureLayer
-
     featureLayer = L.mapbox.featureLayer(snapshot.val())
         .eachLayer(function(l) {
             // Which positions markers below the marker you drag, so that
