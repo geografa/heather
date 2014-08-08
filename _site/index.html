@@ -119,7 +119,7 @@ var marker = L.marker([0, 0], {
 // every time the marker is dragged, update the form
 map.on('click', function(e) {
     marker.setLatLng(map.getCenter());
-    // marker.openPopup();
+    marker.openPopup();
     // When the user clicks Add
     L.DomEvent.addListener(L.DomUtil.get('add-button'), 'click', function() {
         // First, clean the potential-HTML they've added to the value.
