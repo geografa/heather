@@ -1,0 +1,93 @@
+{
+  "-JTqjMNYlwD_LCc0kz16" : {
+    "geometry" : {
+      "coordinates" : [ -122.66647070646286, 45.557806587495286 ],
+      "type" : "Point"
+    },
+    "properties" : {
+      "marker-color" : "#FF0066",
+      "marker-symbol" : "restaurant",
+      "category" : "restaurant",
+      "title" : ""
+    },
+    "type" : "Feature"
+  },
+  "-JTqjN71FRs4HOCA1bxz" : {
+    "geometry" : {
+      "coordinates" : [ -122.66656726598738, 45.55765446491145 ],
+      "type" : "Point"
+    },
+    "properties" : {
+      "marker-color" : "#FF0066",
+      "marker-symbol" : "restaurant",
+      "category" : "restaurant",
+      "title" : "a place"
+    },
+    "type" : "Feature"
+  },
+  "-JTqjkeJjY09DucVYMNp" : {
+    "geometry" : {
+      "coordinates" : [ -122.66645461320876, 45.557590610864665 ],
+      "type" : "Point"
+    },
+    "properties" : {
+      "marker-color" : "#bada55",
+      "marker-symbol" : "beer",
+      "category" : "party",
+      "title" : "Drank"
+    },
+    "type" : "Feature"
+  },
+  "-JTqjs_TEdby-Yqezr1C" : {
+    "geometry" : {
+      "coordinates" : [ -122.6661005616188, 45.55785166077435 ],
+      "type" : "Point"
+    },
+    "properties" : {
+      "marker-color" : "#ddd",
+      "marker-symbol" : "cafe",
+      "category" : "cafe",
+      "title" : "a cafe"
+    },
+    "type" : "Feature"
+  },
+  "-JTsEOhWzdS4fD6WwD8Y" : {
+    "geometry" : {
+      "coordinates" : [ -122.76240259408951, 45.70540756744603 ],
+      "type" : "Point"
+    },
+    "properties" : {
+      "marker-color" : "#FF0066",
+      "marker-symbol" : "restaurant",
+      "category" : "restaurant",
+      "title" : "Yes"
+    },
+    "type" : "Feature"
+  },
+  "-JUPG3AjIwPP0KBs8BXK" : {
+    "geometry" : {
+      "coordinates" : [ -122.75678873062134, 45.70313730646402 ],
+      "type" : "Point"
+    },
+    "properties" : {
+      "marker-color" : "#FF0066",
+      "marker-symbol" : "restaurant",
+      "category" : "restaurant",
+      "title" : ""
+    },
+    "type" : "Feature"
+  },
+  "-JUPGDqttv_f8DoFhceh" : {
+    "geometry" : {
+      "coordinates" : [ -122.6476925611496, 45.5120084932695 ],
+      "type" : "Point"
+    },
+    "properties" : {
+      "marker-color" : "#bada55",
+      "marker-symbol" : "beer",
+      "category" : "party",
+      "title" : "Oui Presse"
+    },
+    "type" : "Feature"
+  }
+}
