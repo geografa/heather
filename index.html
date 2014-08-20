@@ -6,6 +6,13 @@
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
 <script src='https://api.tiles.mapbox.com/mapbox.js/v2.0.0/mapbox.js'></script>
 <link href='https://api.tiles.mapbox.com/mapbox.js/v2.0.0/mapbox.css' rel='stylesheet' />
+<link rel="stylesheet" href="//rawgithub.com/domoritz/leaflet-locatecontrol/gh-pages/src/L.Control.Locate.css" />
+<!--[if lt IE 9]>
+    <link rel="stylesheet" href="//rawgithub.com/domoritz/leaflet-locatecontrol/gh-pages/src/L.Control.Locate.ie.css"/>
+<![endif]-->
+
+<script src="//rawgithub.com/domoritz/leaflet-locatecontrol/gh-pages/src/L.Control.Locate.js" ></script>
+
 <style>
   body { margin:0; padding:0; }
   #map { position:absolute; top:0; bottom:0; width:100%; }
@@ -50,37 +57,23 @@
 <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-label/v0.2.1/leaflet.label.js'></script>
 <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-label/v0.2.1/leaflet.label.css' rel='stylesheet' />
 <div id='map'></div>
-<a href='#' id='geolocate'>Find me</a>
+
 <img src="https://i.cloudup.com/kRCncNvQlE-3000x3000.png" class="center" />
 <script>
 
 L.mapbox.accessToken = 'pk.eyJ1IjoiZ3JhZmEiLCJhIjoiU2U2QnIzUSJ9.4LnG05Ptvi1sUQ8t68rfgw';
-
 // Connect to the example firebase. This is a free account, and so it
 // will fail if given more than 50 concurrent users. Create an account at
 // http://firebaseio.com/ and use your own database if you want to try out
 // this example.
 var base = new Firebase('https://herenow.firebaseio.com/'),
-    map = L.mapbox.map('map', 'grafa.iih2e33n');
-    geolocate = document.getElementById('geolocate');
+    map = L.mapbox.map('map', 'grafa.j88kd98g')
+        .addControl(L.mapbox.geocoderControl('mapbox.places-v1'));
 
-map.setView([45.70425746325636,-122.75944948196411],16);
+    // geolocate = document.getElementById('geolocate');
+L.control.locate().addTo(map);
 
-// This uses the HTML5 geolocation API, which is available on
-// most mobile browsers and modern browsers, but not in Internet Explorer
-//
-// See this chart of compatibility for details:
-// http://caniuse.com/#feat=geolocation
-
-if (!navigator.geolocation) {
-    geolocate.innerHTML = 'geolocation is not available';
-} else {
-    geolocate.onclick = function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        map.locate();
-    };
-}
+map.setView([45.52245801087795, -122.67773866653444],12);
 
 // Create the marker that the user drags to add their message to the map
 var myIcon = L.icon({
@@ -97,15 +90,11 @@ var marker = L.marker([0, 0], {
     // to add the data.
 })
     .bindPopup(
-        '<h2>What are you up to? </h2>' +
+        '<h2>Select a location: </h2>' +
             '<select required name="select" id="status">' + 
-                '<option value="dancing" selected>Dancing</option>' +
-                '<option value="drinking">Drinking</option>' +
-                '<option value="lost">Lost</option>' +
-                '<option value="lovemaking">Snuggling</option>' +
-                '<option value="smoking">Smoking</option>' +
-                '<option value="swimming">Swimming</option>' +
-                '<option value="chilling">Chillin</option>' +
+                '<option value="party">Party</option>' +
+                '<option value="restaurant">Restaurant</option>' +
+                '<option value="cafe">Cafe</option>' +
                 '<option value="other">Other</option>' +
             '</select><br>' +
             '<h2>Say more: </h2>' +
@@ -129,33 +118,13 @@ map.on('click', function(e) {
         geojson.properties.statuscond = statuscond;
 
         switch (geojson.properties.statuscond) {
-            case 'dancing':
+            case 'restaurant':
                 geojson.properties['marker-color'] = '#FF0066';
-                geojson.properties['marker-symbol'] = 'pitch';
+                geojson.properties['marker-symbol'] = 'restaurant';
               break;
-            case 'drinking':
+            case 'party':
                 geojson.properties['marker-color'] = '#bada55';
                 geojson.properties['marker-symbol'] = 'beer';
-              break;
-            case 'lost':
-                geojson.properties['marker-color'] = '#E62E00';
-                geojson.properties['marker-symbol'] = 'roadblock';
-              break;
-            case 'lovemaking':
-                geojson.properties['marker-color'] = '#f30';
-                geojson.properties['marker-symbol'] = 'heart';
-              break;
-            case 'smoking':
-                geojson.properties['marker-color'] = '#996633';
-                geojson.properties['marker-symbol'] = 'danger';
-              break;
-            case 'swimming':
-                geojson.properties['marker-color'] = '#00FFFF';
-                geojson.properties['marker-symbol'] = 'swimming';
-              break;
-            case 'chilling':
-                geojson.properties['marker-color'] = '#FFFF00';
-                geojson.properties['marker-symbol'] = 'lodging';
               break;
             case 'other':
                 geojson.properties['marker-color'] = '#ddd';
@@ -196,21 +165,10 @@ base.limit(200).on('child_added', function(snapshot) {
 // =============================
 // Once we've got a position, zoom and center the map
 // on it, and add a single marker.
-map.on('locationfound', function(e) {
-    var myCoords = [e.latlng.lat,e.latlng.lng];
-    map.fitBounds(e.bounds);
-
-    // And hide the geolocation button
-    geolocate.parentNode.removeChild(geolocate);
+map.on('ready', function() {
     marker.addTo(map);
-    // marker.setLatLng(myCoords);
 });
 
-// If the user chooses not to allow their location
-// to be shared, display an error message.
-map.on('locationerror', function() {
-    geolocate.innerHTML = 'position could not be found';
-});
 </script>
 
 </body>
