@@ -2,16 +2,18 @@
 <html>
 <head>
 <meta charset=utf-8 />
-<title>What are you doing?</title>
+<title>Add your Twitter handle!</title>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
-<script src='https://api.tiles.mapbox.com/mapbox.js/v2.0.0/mapbox.js'></script>
-<link href='https://api.tiles.mapbox.com/mapbox.js/v2.0.0/mapbox.css' rel='stylesheet' />
-<link rel="stylesheet" href="//rawgithub.com/domoritz/leaflet-locatecontrol/gh-pages/src/L.Control.Locate.css" />
+<script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.8/mapbox.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.8/mapbox.css' rel='stylesheet' />
+<link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.24.0/L.Control.Locate.css' rel='stylesheet' />
 <!--[if lt IE 9]>
-    <link rel="stylesheet" href="//rawgithub.com/domoritz/leaflet-locatecontrol/gh-pages/src/L.Control.Locate.ie.css"/>
+  <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.21.0/L.Control.Locate.ie.css' rel='stylesheet' />
 <![endif]-->
+<link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-label/v0.2.1/leaflet.label.css' rel='stylesheet' />
 
-<script src="//rawgithub.com/domoritz/leaflet-locatecontrol/gh-pages/src/L.Control.Locate.js" ></script>
+<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-label/v0.2.1/leaflet.label.js'></script>
+<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.24.0/L.Control.Locate.js'></script>
 
 <style>
   body { margin:0; padding:0; }
@@ -37,6 +39,7 @@
     #geolocate:hover {
         background: #ECF5FA;
     }
+    .leaflet-label {background: rgba(255, 10, 168, 0.81);}
     .leaflet-label img {width: 50px;}
     .leaflet-popup-content img {width: 150px;}
     .label-remove {background-color: #f30;}
@@ -54,8 +57,6 @@
 <body>
 
 <script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.6/firebase.js'></script>
-<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-label/v0.2.1/leaflet.label.js'></script>
-<link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-label/v0.2.1/leaflet.label.css' rel='stylesheet' />
 <div id='map'></div>
 
 <img src="https://i.cloudup.com/kRCncNvQlE-3000x3000.png" class="center" />
@@ -67,8 +68,8 @@ L.mapbox.accessToken = 'pk.eyJ1IjoiZ3JhZmEiLCJhIjoiU2U2QnIzUSJ9.4LnG05Ptvi1sUQ8t
 // http://firebaseio.com/ and use your own database if you want to try out
 // this example.
 var base = new Firebase('https://herenow.firebaseio.com/'),
-    map = L.mapbox.map('map', 'grafa.j88kd98g')
-        .addControl(L.mapbox.geocoderControl('mapbox.places-v1'));
+    map = L.mapbox.map('map', 'grafa.f80610c8')
+        .addControl(L.mapbox.geocoderControl('mapbox.places'));
 
     // geolocate = document.getElementById('geolocate');
 L.control.locate().addTo(map);
@@ -127,7 +128,7 @@ map.on('click', function(e) {
                 geojson.properties['marker-symbol'] = 'beer';
               break;
             case 'other':
-                geojson.properties['marker-color'] = '#ddd';
+                geojson.properties['marker-color'] = '#f30';
                 geojson.properties['marker-symbol'] = 'harbor';
               break;
             default:
