@@ -72,49 +72,32 @@ img.center {
 </head>
 <body>
 
-    <script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.6/firebase.js'></script>
-    <div id='map'></div>
+<script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.6/firebase.js'></script>
+<div id='map'></div>
 
-    <img src="./img/arrow.png" class="center" />
-    <script>
+<img src="./img/arrow.png" class="center" />
+<script>
 
-    L.mapbox.accessToken = 'pk.eyJ1IjoiZ3JhZmEiLCJhIjoiU2U2QnIzUSJ9.4LnG05Ptvi1sUQ8t68rfgw';
+L.mapbox.accessToken = 'pk.eyJ1IjoiZ3JhZmEiLCJhIjoiU2U2QnIzUSJ9.4LnG05Ptvi1sUQ8t68rfgw';
 // Connect to the example firebase. This is a free account, and so it
 // will fail if given more than 50 concurrent users. Create an account at
 // http://firebaseio.com/ and use your own database if you want to try out
 // this example.
 var base = new Firebase('https://herenow.firebaseio.com/'),
 map = L.mapbox.map('map', 'grafa.f80610c8')
-.addControl(L.mapbox.geocoderControl('mapbox.places'));
+    .setView([0,164.75],3)
+    .addControl(L.mapbox.geocoderControl('mapbox.places'));
 
     // geolocate = document.getElementById('geolocate');
     L.control.locate().addTo(map);
 
-    map.setView([-41.29953946690072,174.76721999999998],12);
-
-// Create the marker that the user drags to add their message to the map
-var myIcon = L.icon({
-    iconUrl: 'https://i.cloudup.com/kRCncNvQlE-3000x3000.png',
-    iconSize: [48,48],
-    popupAnchor: [1, -16],
-});
 
 var marker = L.marker([0, 0], {
     draggable: false,
-    icon: myIcon,
     opacity: 0
-    // Add a form to that marker that lets them specify a message and click Add
-    // to add the data.
 })
 .bindPopup(
     '<h2>Twitter: </h2>' +
-    // '<select required name="select" id="status">' + 
-    // '<option value="party">Party</option>' +
-    // '<option value="restaurant">Restaurant</option>' +
-    // '<option value="cafe">Cafe</option>' +
-    // '<option value="other">Other</option>' +
-    // '</select><br>' +
-    // '<h2>Say more: </h2>' +
     '<input type="text" id="message" placeholder="username" required width=70px  /><br />' +
     '<button id="add-button">Submit</button>');
 
@@ -135,27 +118,9 @@ map.on('click', function(e) {
         geojson.properties['marker-color'] = '#E13D21';
         geojson.properties['marker-symbol'] = 'star';
 
-        // switch (geojson.properties.statuscond) {
-        //     case 'restaurant':
-        //         geojson.properties['marker-color'] = '#e23e22';
-        //         geojson.properties['marker-symbol'] = 'restaurant';
-        //       break;
-        //     case 'party':
-        //         geojson.properties['marker-color'] = '#bada55';
-        //         geojson.properties['marker-symbol'] = 'beer';
-        //       break;
-        //     case 'other':
-        //         geojson.properties['marker-color'] = '#e23e22';
-        //         geojson.properties['marker-symbol'] = 'harbor';
-        //       break;
-        //     default:
-        //       geojson.properties['marker-symbol'] = 'star';
-
-        // }
-
         // And save it to Firebase
         base.push(geojson);
-        map.panBy([0, 60]);
+        map.panBy([0, 50]);
         marker.closePopup();
     });
 });
