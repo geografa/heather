@@ -23,6 +23,12 @@ body { margin:0; padding:0; }
 .leaflet-popup-content a {color: #bada55;}
 .leaflet-popup-content h2 {font-size:32px;}
 .leaflet-popup-content a:hover {color: #d8fc62;}
+.leaflet-container a {
+    color: #fff;
+}
+.leaflet-bar a, .leaflet-bar a:hover {
+    color: #333;
+}
 .leaflet-popup-tip {border-top: 10px solid #E13D21;}
 #geolocate {
     background: #fff;
@@ -57,10 +63,10 @@ img.center {
    position: absolute;
    top: 50%;
    left: 50%;
-   width: 50px;
-   height: 50px;
+   width: 80px;
+   height: 80px;
    margin-top: -25px; /* Half the height */
-   margin-left: -25px; /* Half the width */
+   margin-left: -10px; /* Half the width */
 }
 </style>
 </head>
@@ -69,7 +75,7 @@ img.center {
     <script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.6/firebase.js'></script>
     <div id='map'></div>
 
-    <img src="https://i.cloudup.com/kRCncNvQlE-3000x3000.png" class="center" />
+    <img src="./img/arrow.png" class="center" />
     <script>
 
     L.mapbox.accessToken = 'pk.eyJ1IjoiZ3JhZmEiLCJhIjoiU2U2QnIzUSJ9.4LnG05Ptvi1sUQ8t68rfgw';
@@ -109,7 +115,7 @@ var marker = L.marker([0, 0], {
     // '<option value="other">Other</option>' +
     // '</select><br>' +
     // '<h2>Say more: </h2>' +
-    '<input type="text" id="message" placeholder="blah" required width=70px  /><br />' +
+    '<input type="text" id="message" placeholder="username" required width=70px  /><br />' +
     '<button id="add-button">Submit</button>');
 
 // every time the marker is dragged, update the form
@@ -149,6 +155,7 @@ map.on('click', function(e) {
 
         // And save it to Firebase
         base.push(geojson);
+        map.panBy([0, 60]);
         marker.closePopup();
     });
 });
@@ -160,11 +167,11 @@ base.limit(200).on('child_added', function(snapshot) {
     .eachLayer(function(l) {
             // Which positions markers below the marker you drag, so that
             // they don't overlap in the z-index.
-            l.setZIndexOffset(-1000)
+            l.setZIndexOffset(-1000);
             // And each marker should have a label with its title.
             var geojson = l.toGeoJSON();
             if (geojson && geojson.properties && geojson.properties.title) {
-                l.bindLabel(L.mapbox.sanitize(geojson.properties.title), {
+                l.bindLabel(L.mapbox.sanitize('<a href="https://twitter.com/' + geojson.properties.title +'" target="_blank">' + geojson.properties.title + '</a>'), {
                     noHide: true
                 });
             }
