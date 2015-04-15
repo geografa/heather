@@ -21,7 +21,7 @@ body { margin:0; padding:0; }
 .leaflet-popup-content {background: #E13D21; color: #fff; border-color: #fff; border-radius:12px; margin: 6px;}
 .leaflet-popup-content-wrapper {border-radius: 12px; background: #E13D21; color: #fff;}
 .leaflet-popup-content a {color: #bada55;}
-.leaflet-popup-content h2 {font-size:32px;}
+.leaflet-popup-content h2 {font-size:18px;}
 .leaflet-popup-content a:hover {color: #d8fc62;}
 .leaflet-container a {
     color: #fff;
@@ -75,7 +75,7 @@ img.center {
 <script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.6/firebase.js'></script>
 <div id='map'></div>
 
-<img src="./img/arrow.png" class="center" />
+<img src="./img/arrow.png" class="center" id="arrow" />
 <script>
 
 L.mapbox.accessToken = 'pk.eyJ1IjoiZ3JhZmEiLCJhIjoiU2U2QnIzUSJ9.4LnG05Ptvi1sUQ8t68rfgw';
@@ -85,7 +85,7 @@ L.mapbox.accessToken = 'pk.eyJ1IjoiZ3JhZmEiLCJhIjoiU2U2QnIzUSJ9.4LnG05Ptvi1sUQ8t
 // this example.
 var base = new Firebase('https://herenow.firebaseio.com/'),
 map = L.mapbox.map('map', 'grafa.f80610c8')
-    .setView([0,164.75],3)
+    .setView([26,27],2)
     .addControl(L.mapbox.geocoderControl('mapbox.places'));
 
     // geolocate = document.getElementById('geolocate');
@@ -97,12 +97,24 @@ var marker = L.marker([0, 0], {
     opacity: 0
 })
 .bindPopup(
-    '<h2>Twitter: </h2>' +
+    '<h2>Where in the world is: </h2>' +
     '<input type="text" id="message" placeholder="username" required width=70px  /><br />' +
     '<button id="add-button">Submit</button>');
 
+
+function hideImage() {
+    var img = document.getElementById('arrow');
+    img.style.visibility = 'hidden';
+}
+
+function showImage() {
+    var img = document.getElementById('arrow');
+    img.style.visibility = 'visible';
+}
+
 // every time the marker is dragged, update the form
 map.on('click', function(e) {
+    hideImage();
     marker.setLatLng(map.getCenter());
     marker.openPopup();
     // When the user clicks Add
@@ -142,6 +154,10 @@ base.limit(200).on('child_added', function(snapshot) {
             }
         })
     .addTo(map);
+});
+
+map.on('popupclose', function(e) {
+    showImage();
 });
 
 // Use this for geolocation
