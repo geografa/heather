@@ -84,9 +84,7 @@ L.mapbox.accessToken = 'pk.eyJ1IjoiZ3JhZmEiLCJhIjoiU2U2QnIzUSJ9.4LnG05Ptvi1sUQ8t
 // http://firebaseio.com/ and use your own database if you want to try out
 // this example.
 var base = new Firebase('https://herenow.firebaseio.com/'),
-map = L.mapbox.map('map', 'grafa.f80610c8',{
-    doubleClickZoom: false
-})
+map = L.mapbox.map('map', 'grafa.f80610c8')
     .setView([26,27],2)
     .addControl(L.mapbox.geocoderControl('mapbox.places'));
 
@@ -115,7 +113,7 @@ function showImage() {
 }
 
 // every time the marker is dragged, update the form
-map.on('dblclick', function(e) {
+map.on('click', function(e) {
     hideImage();
     marker.setLatLng(map.getCenter());
     marker.openPopup();
