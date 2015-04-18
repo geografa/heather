@@ -1,6 +1,6 @@
 {
   "version": 7,
-  "name": "Basic",
+  "name": "Map",
   "constants": {
     "@road-minor-width": {
       "base": 1.55,
@@ -82,7 +82,7 @@
     "source": "mapbox",
     "source-layer": "water",
     "layout": {
-      "visibility": "visible"
+      "visibility": "none"
     },
     "paint": {
       "fill-color": "#0e1618"
@@ -135,7 +135,7 @@
     "layout": {
       "line-cap": "round",
       "line-join": "round",
-      "visibility": "visible"
+      "visibility": "none"
     },
     "paint": {
       "line-color": "@road-minor",
@@ -150,7 +150,7 @@
     "layout": {
       "line-cap": "round",
       "line-join": "round",
-      "visibility": "visible"
+      "visibility": "none"
     },
     "paint": {
       "line-color": "@road-major",
@@ -229,7 +229,7 @@
     "layout": {
       "line-cap": "round",
       "line-join": "round",
-      "visibility": "visible"
+      "visibility": "none"
     },
     "paint": {
       "line-color": "#8b8a8a",
@@ -272,7 +272,7 @@
       "text-field": "@name",
       "text-font": "@sans_bd",
       "text-max-width": 10,
-      "visibility": "visible"
+      "visibility": "none"
     },
     "paint": {
       "text-color": "@label",
@@ -294,7 +294,7 @@
       "text-field": "@name",
       "text-font": "@sans_md",
       "text-max-width": 6,
-      "visibility": "visible"
+      "visibility": "none"
     },
     "paint": {
       "text-color": "@label",
@@ -318,7 +318,7 @@
       "text-transform": "uppercase",
       "text-letter-spacing": 0.1,
       "text-max-size": 14,
-      "visibility": "visible"
+      "visibility": "none"
     },
     "paint": {
       "text-color": "@label",
@@ -340,7 +340,7 @@
       "icon-image": "{maki}-12",
       "text-max-size": 11,
       "text-font": "@sans_md",
-      "visibility": "visible",
+      "visibility": "none",
       "text-offset": [0, 0.5],
       "text-anchor": "top",
       "text-field": "@name",
@@ -385,7 +385,7 @@
     }
   }],
   "owner": "grafa",
-  "modified": "2015-04-18T05:33:40.392Z",
+  "modified": "2015-04-18T05:50:01.492Z",
   "created": "2015-04-18T04:36:31.956Z",
   "id": "grafa.d603fd89"
 }
