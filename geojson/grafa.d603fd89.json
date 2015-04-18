@@ -82,7 +82,7 @@
     "source": "mapbox",
     "source-layer": "water",
     "layout": {
-      "visibility": "none"
+      "visibility": "visible"
     },
     "paint": {
       "fill-color": "#0e1618"
