@@ -148,7 +148,7 @@ base.limit(200).on('child_added', function(snapshot) {
             // And each marker should have a label with its title.
             var geojson = l.toGeoJSON();
             if (geojson && geojson.properties && geojson.properties.title) {
-                l.bindLabel(L.mapbox.sanitize('<a href="https://twitter.com/' + geojson.properties.title +'" target="_blank">' + geojson.properties.title + '</a>'), {
+                l.bindLabel(L.mapbox.sanitize('<a href="' + geojson.properties.title +'" target="_blank">' + geojson.properties.title + '</a>'), {
                     noHide: true
                 });
             }
