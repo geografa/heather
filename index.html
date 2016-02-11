@@ -78,13 +78,13 @@ img.center {
 <img src="./img/arrow.png" class="center" id="arrow" />
 <script>
 
-L.mapbox.accessToken = 'pk.eyJ1IjoiZ3JhZmEiLCJhIjoidElsMW1FayJ9.2dDepWTiSX3YS6alAjFJDg';
+L.mapbox.accessToken = 'pk.eyJ1IjoiZ3JhZmEiLCJhIjoiZjk3Mjk2YWYzZTNlYjM3ODdlNzJlOWJlM2VjZGI0ZDEifQ.OTT9oT7CqAc9vZsnJLT51Q';
 // Connect to the example firebase. This is a free account, and so it
 // will fail if given more than 50 concurrent users. Create an account at
 // http://firebaseio.com/ and use your own database if you want to try out
 // this example.
 var base = new Firebase('https://herenow.firebaseio.com/'),
-map = L.mapbox.map('map', 'grafa.f80610c8')
+map = L.mapbox.map('map', 'grafa.7a042d2a')
     .setView([26,27],2)
     .addControl(L.mapbox.geocoderControl('mapbox.places'));
 
@@ -97,8 +97,8 @@ var marker = L.marker([0, 0], {
     opacity: 0
 })
 .bindPopup(
-    '<h2>Where in the world is: </h2>' +
-    '<input type="text" id="message" placeholder="username" required width=70px  /><br />' +
+    '<h2>Put yo Heather here: </h2>' +
+    '<input type="text" id="message" placeholder="youtube link" required width=70px  /><br />' +
     '<button id="add-button">Submit</button>');
 
 
